@@ -9,7 +9,7 @@ with open("requirements.txt", "r") as req:
 
 setuptools.setup(
     name="limestone-finance",
-    version="0.0.0",
+    version="0.0.1",
     author="Fabian Riewe",
     author_email="fabian@kyve.network",
     description="A python wrapper for limestone.finance",
