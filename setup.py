@@ -5,6 +5,7 @@ with open("README.md", "r") as fh:
 
 with open("requirements.txt", "r") as req:
     requires = req.readlines()
+    requires = list(map(lambda x: x.strip(), requires))
 
 setuptools.setup(
     name="limestone",
