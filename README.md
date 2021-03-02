@@ -3,12 +3,12 @@
 An api to access trusted token pricing data secured on Arweave and protected by provider's collateral.
 
 ## Installation
-`pip install limestone`
+`pip install limestone-finance`
 
 ## Usage
 
 ```python
-from limestone import get_price
+from limestone_finance import get_price
 
 price = get_price("AR")
 ```

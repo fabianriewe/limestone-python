@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as req:
     requires = list(map(lambda x: x.strip(), requires))
 
 setuptools.setup(
-    name="limestone",
+    name="limestone-finance",
     version="0.0.0",
     author="Fabian Riewe",
     author_email="fabian@kyve.network",

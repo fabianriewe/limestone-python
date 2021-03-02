@@ -1,4 +1,4 @@
-from limestone import _query, get_price
+from limestone_finance import _query, get_price
 
 
 def test__query():
