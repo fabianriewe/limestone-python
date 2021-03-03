@@ -1,5 +1,6 @@
 from simple_graphql_client import GraphQLClient
 from datetime import datetime
+from typing import Optional
 
 client = GraphQLClient("https://arweave.net/graphql")
 
@@ -8,7 +9,7 @@ query transactions(
   $type: String!
   $token: String!
   $version: String!
-  $minBlock: Int!
+  $maxBlock: Int
 ) {
   transactions(
     tags: [
@@ -17,7 +18,7 @@ query transactions(
       { name: "token", values: [$token] }
       { name: "version", values: [$version] }
     ]
-    block: { min: $minBlock }
+    block: { max: $maxBlock }
     first: 1
   ) {
     edges {
@@ -33,7 +34,7 @@ query transactions(
 """
 
 
-def _query(type: str, token: str, version: str, min_block: int):
+def _query(type: str, token: str, version: str, max_block: Optional[int]):
     # specify return object
     ret = {}
 
@@ -42,7 +43,7 @@ def _query(type: str, token: str, version: str, min_block: int):
         "type": type,
         "token": token,
         "version": version,
-        "minBlock": min_block
+        "maxBlock": max_block
     }
 
     result = client.query(limestone_query, variables=variables)
@@ -56,11 +57,11 @@ def _query(type: str, token: str, version: str, min_block: int):
         if name == "value":
             ret['price'] = float(value)
         if name == "time":
-            timestamp = datetime.fromtimestamp(float(value) / 1000)
+            timestamp = datetime.utcfromtimestamp(float(value) / 1000)
             ret['updated'] = datetime.isoformat(timestamp)
 
     return ret
 
 
-def get_price(token: str, min_block: int = 0):
-    return _query(type="data-latest", token=token, version="0.005", min_block=min_block)
+def get_price(token: str, at_block: Optional[int] = None):
+    return _query(type="data-latest", token=token, version="0.005", max_block=at_block)

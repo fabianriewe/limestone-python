@@ -18,15 +18,15 @@ price = get_price("AR")
 ```python
 from limestone_finance import get_price
 
-price = get_price("AR", min_block=123456)
+price = get_price("AR", at_block=123456)
 ```
 
 ## Data format
 
 ```
 {
-  price: 2.05, //as Float
-  updated: '2020-11-03 16:00:00', //as Date
+  price: 11.74, //as Float
+  updated: '2021-02-25T07:55:00.467000', //as UTC Date string
 }
 ```
 
